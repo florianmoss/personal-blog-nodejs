@@ -34,8 +34,15 @@
       notify:
       - start mongodb
 
+    - name: Install npm
+      apt:
+        name: git
+        state: present
+
   handlers:
   - name: start mongodb
     service:
       name: mongod
       state: started
+
+
