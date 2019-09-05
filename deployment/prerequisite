@@ -1,0 +1,15 @@
+# For Ubuntu 16.04
+
+# Install Ansible
+sudo apt-get install ansible
+# Install SSH
+sudo apt-get install ssh
+# Create a new user with sudo rights
+sudo adduser webapp
+sudo usermod -aG sudo webapp
+
+# Ensure that repos are accessible
+sudo nano /etc/apt/sources.list
+
+-> and comment or remove lines that include cdrom. eg:
+> deb cdrom:[Ubuntu-Server 16.04 LTS _Xenial Xerus_ - Release amd64 (20160420.3)]/ xenial main restricted

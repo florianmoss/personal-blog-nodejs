@@ -1,0 +1,13 @@
+---
+
+- hosts: prod
+  vars:
+    PORT: 4000
+    DB_URL: mongodb://localhost/blog
+    EXPRESS_SESSION_KEY: ergreerwjef32r23jimsewewlekmf3023r029wf 
+  become: true
+  tasks:
+    - name: Install nodeJS
+      apt:
+        name: nodejs
+        state: present
