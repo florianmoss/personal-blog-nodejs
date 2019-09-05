@@ -6,7 +6,11 @@
   tasks:
     - name: upgrade all packages
       apt:
-      upgrade: yes
+        upgrade: yes
+
+    - name: install curl
+      apt:
+        name: curl
 
     - name: add nodejs repo to repolist
       shell: "curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -"
@@ -14,11 +18,6 @@
     - name: Install nodeJS
       apt:
         name: nodejs
-        state: present
-  
-    - name: Install nodeJS
-      apt:
-        name: nodejs-legacy
         state: present
 
     - name: Install npm
@@ -59,10 +58,13 @@
     - name: Create the .env file
       copy:
         dest: "/tmp/blog/.env"
-        content: "|
-          PORT: {{ PORT }}
-          DB_URL: {{ DB_URL }}
-          EXPRESS_SESSION_KEY: {{ EXPRESS_SESSION_KEY }}"
+        content: "
+          PORT={{ PORT }} \n
+          DB_URL={{ DB_URL }} \n
+          EXPRESS_SESSION_KEY={{ EXPRESS_SESSION_KEY }}"
+
+    - name: ensure that bcrypt is peoperly working
+      command: "npm install -g bcrypt"
 
   handlers:
   - name: start mongodb
