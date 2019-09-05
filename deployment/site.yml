@@ -4,9 +4,21 @@
     - vars.yml
   become: true
   tasks:
+    - name: upgrade all packages
+      apt:
+      upgrade: yes
+
+    - name: add nodejs repo to repolist
+      shell: "curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -"
+
     - name: Install nodeJS
       apt:
         name: nodejs
+        state: present
+  
+    - name: Install nodeJS
+      apt:
+        name: nodejs-legacy
         state: present
 
     - name: Install npm
@@ -39,7 +51,8 @@
         name: git
         state: present
 
-    - git:
+    - name: clone src repo into /tmp
+      git:
         repo: "{{ REPO }}"
         dest: /tmp/blog
 
