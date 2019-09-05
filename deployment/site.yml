@@ -34,10 +34,22 @@
       notify:
       - start mongodb
 
-    - name: Install npm
+    - name: Install git
       apt:
         name: git
         state: present
+
+    - git:
+        repo: "{{ REPO }}"
+        dest: /tmp/blog
+
+    - name: Create the .env file
+      copy:
+        dest: "/tmp/blog/.env"
+        content: "|
+          PORT: {{ PORT }}
+          DB_URL: {{ DB_URL }}
+          EXPRESS_SESSION_KEY: {{ EXPRESS_SESSION_KEY }}"
 
   handlers:
   - name: start mongodb

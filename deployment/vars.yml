@@ -1,5 +1,6 @@
 ---
 
+REPO: "https://github.com/florianmoss/personal-blog-nodejs.git"
 PORT: 4000
-DB_URL: mongodb://localhost/blog
-EXPRESS_SESSION_KEY: ergreerwjef32r23jimsewewlekmf3023r029wf 
+DB_URL: "mongodb://localhost/blog"
+EXPRESS_SESSION_KEY: "ergreerwjef32r23jimsewewlekmf3023r029wf" 
