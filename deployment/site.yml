@@ -1,5 +1,4 @@
 ---
-
 - hosts: prod
   vars_files:
     - vars.yml
@@ -9,33 +8,34 @@
       apt:
         name: nodejs
         state: present
-    
+
     - name: Install npm
       apt:
         name: npm
         state: present
 
     - name: Import the public key used by the package management system
-      apt_key: 
-        keyserver: hkp://keyserver.ubuntu.com:80 
-        id: EA312927 
+      apt_key:
+        keyserver: hkp://keyserver.ubuntu.com:80
+        id: EA312927
         state: present
 
     - name: Add MongoDB repository
-      apt_repository: 
-        repo: 'deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse' 
+      apt_repository:
+        repo: 'deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse'
         state: present
 
     - name: install mongodb
-      apt: 
-        name: mongodb-org 
-        state: latest 
+      apt:
+        name: mongodb-org
+        state: present
+        force: yes
         update_cache: yes
       notify:
       - start mongodb
 
   handlers:
   - name: start mongodb
-    service: 
-      name: mongod 
+    service:
+      name: mongod
       state: started
